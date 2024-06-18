@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, except: [:new, :create, :index, :show, :destroy]
+  before_action :move_to_index, except: [:new, :create, :index, :show]
 
   def new
     @item = Item.new
@@ -35,12 +35,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user_id
-      @item.destroy
-      redirect_to root_path
-    else
-      redirect_to request.referrer || root_path
-    end
+    @item.destroy
+    redirect_to root_path
   end
 
   private
