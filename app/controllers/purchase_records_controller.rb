@@ -5,6 +5,8 @@ class PurchaseRecordsController < ApplicationController
   def index
     if @item.purchase_record.present?
       redirect_to root_path
+    elsif current_user.id == @item.user_id
+      redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       @purchase_address = PurchaseAddress.new
