@@ -8,6 +8,11 @@ FactoryBot.define do
     shipping_origin_id { 2 }
     shipping_day_id    { 2 }
     price              { Faker::Number.between(from: 300, to: 9_999_999) }
+
     association :user
+
+    after(:build) do |item|
+      item.image.attach(io: File.open('spec/fixtures/test_image1.png'), filename: 'test_image1.png')
+    end
   end
 end

@@ -8,6 +8,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :items
+  has_many :purchase_records
+
   validates :nickname, presence: true
   validates :password, format: { with: VALID_PASSWORD_REGEX }
   validates :name_last, presence: true, format: { with: VALID_NAME_REGEX }
