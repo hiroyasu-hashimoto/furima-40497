@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   root to: "items#index"
   get 'items/index'
 
-  resources :items
+  resources :items do
+    resources :purchase_records
+  end
 end
